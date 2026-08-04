@@ -93,7 +93,8 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
+  /* .container と同じ左右パディングを保つ（0 にすると狭い画面で端に貼りつく） */
+  padding: 14px 20px;
   flex-wrap: wrap;
 }
 
