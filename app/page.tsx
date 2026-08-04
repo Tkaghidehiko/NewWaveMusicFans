@@ -10,17 +10,16 @@ export default function HomePage() {
   return (
     <div className="container">
       <section className="hero">
-        <span className="hero-badge">◆ THIS WEEK</span>
+        <span className="hero-badge">◆ PICK UP</span>
         {featured ? (
           <Link href={`/articles/${featured.slug}`} className="hero-card">
             <span className="eyebrow" style={{ color: "#ffd166" }}>
-              今週の注目
+              注目記事
             </span>
             <h1>{featured.title}</h1>
             <p>{featured.lead}</p>
             <div className="hero-actions">
               <span className="btn-primary">記事を読む</span>
-              <span className="btn-ghost">カテゴリを見る</span>
             </div>
           </Link>
         ) : (
@@ -65,8 +64,8 @@ export default function HomePage() {
             </span>
             <p className="name">{c.description}</p>
             <p className="desc">
-              いま注目されているジャンルとアーティストの傾向を追い、
-              4つのカテゴリを横断して「現在地」を示す定点観測です。
+              一定期間のデータをまとめて見て、4つのカテゴリを横断して
+              「現在地」を示す定点観測です。
             </p>
           </Link>
         </section>

@@ -90,10 +90,19 @@ const fs=require("fs"),m=require("/home/user/NewWaveMusicFans/node_modules/gray-
 const d="/home/user/NewWaveMusicFans/content/articles";
 for(const f of fs.readdirSync(d).filter(x=>x.endsWith(".md"))){
   const h=marked.parse(m(fs.readFileSync(d+"/"+f,"utf8")).content,{async:false});
-  const bad=[...h.matchAll(/.{0,30}\*\*.{0,30}/g)].map(x=>x[0].replace(/\n/g," "));
-  if(bad.length) console.log(f, bad);
+  if(h.includes("**")) console.log("LITERAL ** :",f);
+  const n=[...h.matchAll(/<strong>(?:(?!<\/strong>)[\s\S])*?<strong>/g)];
+  if(n.length) console.log("NESTED STRONG:",f,"x"+n.length);
 }'
 ```
+
+⚠️ **`**` が残るかだけを見ても不十分です。** 壊れ方には2種類あります。
+
+1. `**` が literal で残る（画面に `**` が出る）
+2. **`**` は消えるが `<strong>` が入れ子になり、意図しない範囲まで太字になる**
+
+2は目視でも `**` 検索でも見つかりません。実際に1件、太字にするつもりのなかった26字が
+太字になっていました。上のスクリプトは両方を拾います。
 
 **太字の使いすぎ**もチェックしてください。1段落に何箇所も `**` があると、
 どれも強調されていないのと同じになります。

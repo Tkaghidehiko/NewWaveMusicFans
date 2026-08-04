@@ -33,7 +33,7 @@ export const categories: Category[] = [
     kind: "domain",
     label: "Next Wave",
     labelEn: "NEXT WAVE",
-    description: "次世代アーティスト候補",
+    description: "ブレイク前夜の新人",
     color: "#ffd166",
     gradient: "linear-gradient(135deg, #4d3f1a, #131c30)",
   },
@@ -51,7 +51,7 @@ export const categories: Category[] = [
     kind: "domain",
     label: "J → World",
     labelEn: "J → WORLD",
-    description: "世界が注目する日本人",
+    description: "世界が注目する日本勢",
     color: "#ff8a50",
     gradient: "linear-gradient(135deg, #55301c, #131c30)",
   },
@@ -69,7 +69,7 @@ export const categories: Category[] = [
     kind: "axis",
     label: "Wave",
     labelEn: "WAVE",
-    description: "今がどの波の上にあるか",
+    description: "いまどの波の上にあるか",
     // 4本柱が暖色なのに対し、ここだけ寒色にしている。
     // 「並列の5つ目」ではなく「軸が違う」ことを色で示すための意図的な逸脱。
     color: "#7ecfc7",

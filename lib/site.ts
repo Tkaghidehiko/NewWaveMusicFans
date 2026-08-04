@@ -27,7 +27,7 @@ export const siteName = "NewWaveMusicFans";
 export const siteTagline = "次世代の音楽と、日本と世界のあいだ";
 
 export const siteDescription =
-  "ブレイク前夜の次世代アーティスト、海外の新しい流行、そして日本と世界が互いに注目し合うアーティストを追う音楽メディア。";
+  "ブレイク前夜の次世代アーティスト、海外で生まれている新しい流行、そして日本と世界が互いに注目し合う動きを追う音楽メディア。";
 
 /** 検索エンジンにインデックスさせてよいか。本番ドメインが確定するまでは無効にできる。 */
 export const isIndexable = process.env.NEXT_PUBLIC_ALLOW_INDEXING !== "false";

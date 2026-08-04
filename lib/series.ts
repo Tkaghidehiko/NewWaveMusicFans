@@ -41,7 +41,7 @@ export const seriesList: Series[] = [
     category: "next-wave",
     label: "上陸前",
     labelEn: "BEFORE JAPAN",
-    description: "日本で観られるようになる前に",
+    description: "日本で観られるのはいつか",
     intro:
       "海外で評価が固まったアーティストが日本のフェスに並ぶまでには、時間差があります。この連載では、その時間差の内側にいる — つまり、まだ日本で観る機会がないアーティストを扱います。",
   },
@@ -50,7 +50,7 @@ export const seriesList: Series[] = [
     category: "next-wave",
     label: "深掘り",
     labelEn: "DEEP DIVE",
-    description: "1組をじっくり掘る",
+    description: "1組だけをどこまで掘れるか",
     intro:
       "リスト記事では1組あたり数行しか割けません。この連載では対象を1組に絞り、経歴・音楽性・これから起きそうなことまでを掘り下げます。",
   },
@@ -85,7 +85,7 @@ export const seriesList: Series[] = [
     labelEn: "JAPAN DOMESTIC",
     description: "日本のリスナーが何にお金を使っているか",
     intro:
-      "日本国内で音楽の需要がどこに向かっているかを追います。ストリーミングの数字だけを見ていると、日本の音楽経済の大部分を見落とします。ライブ・フィジカル・配信を並べて、需要の重心がどこにあるのかを確かめます。",
+      "日本国内で音楽の需要がどこに向かっているかを追います。海外に届く曲と国内で売れる曲は別の条件で決まるため、日本発の波とは分けて扱います。リスナーが実際にどこにお金を払っているかを、金額で追いかけます。",
   },
 ];
 
