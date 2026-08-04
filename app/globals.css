@@ -460,6 +460,41 @@ img {
   word-break: break-all;
 }
 
+/* ヘッダー内で軸の違うセクション（Wave）を4本柱と区切る */
+.nav-axis {
+  color: var(--accent);
+  padding-left: 14px;
+  border-left: 1px solid var(--border);
+}
+
+/* トップページの Wave 枠。4本柱の下に一段下げて置く */
+.axis-banner {
+  display: block;
+  border: 1px solid var(--border-card);
+  border-left: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px 22px;
+  background: var(--surface);
+  transition: border-color 0.15s ease;
+}
+
+.axis-banner:hover {
+  border-color: var(--accent);
+}
+
+.axis-banner .name {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+
+.axis-banner .desc {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin: 6px 0 0;
+  max-width: 620px;
+}
+
 /* サブカテゴリ（連載）のナビ。カテゴリページで記事一覧の前に置く */
 .series-nav {
   display: grid;

@@ -38,6 +38,7 @@ npm run build    # 本番ビルド
 ## ドキュメント
 
 - [設計・計画ドキュメント](docs/DESIGN.md)
+- [記事の構成マップ](docs/CONTENT-MAP.md) — 何をどこに書くか。記事を書く前にここを見る
 - [ユーザー機能の仕様（ドラフト）](docs/FEATURES-USER.md)
 - [記事・アーティストデータの書き方](content/README.md)
 

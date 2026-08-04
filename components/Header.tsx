@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories } from "@/lib/categories";
+import { domainCategories, axisCategories } from "@/lib/categories";
 
 export default function Header() {
   return (
@@ -10,8 +10,19 @@ export default function Header() {
           <span>NewWaveMusicFans</span>
         </Link>
         <nav className="nav">
-          {categories.map((c) => (
+          {domainCategories.map((c) => (
             <Link key={c.slug} href={`/${c.slug}`}>
+              {c.label}
+            </Link>
+          ))}
+          {/* 軸が違うため、4本柱とは区切って置く */}
+          {axisCategories.map((c) => (
+            <Link
+              key={c.slug}
+              href={`/${c.slug}`}
+              className="nav-axis"
+              style={{ ["--accent" as string]: c.color }}
+            >
               {c.label}
             </Link>
           ))}
