@@ -486,6 +486,15 @@ img {
   color: var(--text-sub);
 }
 
+/* a のデフォルトは color: inherit / text-decoration: none のため、
+   本文中のリンクは明示的に色と下線を与えないと本文と見分けがつかない。 */
+.prose a,
+.note a {
+  color: var(--global-trends);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* 背景の端が明るくなるため、フッターは自前の暗い面を持たせて可読性を確保する */
 .site-footer {
   border-top: 1px solid var(--border);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import {
@@ -48,6 +49,9 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        {/* アクセス解析。Cookieを使わず個人を特定しない集計のみを行う。
+            計測内容はプライバシーポリシーに記載しているため、変更時は同ページも更新すること。 */}
+        <Analytics />
       </body>
     </html>
   );
