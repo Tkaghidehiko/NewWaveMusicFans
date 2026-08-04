@@ -1,0 +1,46 @@
+# content — 記事とアーティストのデータ
+
+⚠️ **現在入っているのはすべてサンプルです。** 構造とデザインを確認するための仮データで、
+登場するアーティストは架空の存在です。公開前にすべて実在の取材・調査に基づく記事へ差し替えてください。
+
+## articles/*.md
+
+Markdown の先頭にフロントマターを書きます。
+
+```yaml
+---
+title: 記事タイトル
+lead: 一覧やトップに表示される要約文
+category: next-wave        # next-wave / global-trends / j-to-world / world-to-j
+publishedAt: 2026-08-04    # YYYY-MM-DD
+artists:                   # 登場アーティストの slug（アーティストブックの土台）
+  - wren-halloway
+sources:                   # 参照元（著作権対応のため必須）
+  - title: 参照元の記事名・媒体名
+    url: https://example.com/...
+---
+```
+
+### 執筆時のルール
+- 参照元の文章をそのまま転載・翻訳しない。必ず自分の言葉で書く
+- 歌詞は掲載しない
+- `sources` は必ず記入する
+- `artists` を書き忘れると、その記事はアーティストブックに紐づかない
+
+## artists/*.json
+
+```json
+{
+  "slug": "wren-halloway",
+  "name": "Wren Halloway",
+  "country": "イギリス",
+  "genre": "Indie Folk",
+  "bio": "紹介文",
+  "members": [
+    { "name": "Wren Halloway", "role": "Vo, Gt", "birthdate": null }
+  ]
+}
+```
+
+`birthdate` は **公表されている情報のみ** を入れます。不明な場合は `null` のままにしてください
+（マヤ暦の相性診断で使用しますが、推測で埋めてはいけません）。

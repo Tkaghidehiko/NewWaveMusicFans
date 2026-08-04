@@ -1,0 +1,11 @@
+{
+  "slug": "aoi-tsukishima",
+  "name": "Aoi Tsukishima",
+  "nameJa": "月島 葵",
+  "country": "日本",
+  "genre": "Alternative R&B",
+  "bio": "（サンプルデータ・架空のアーティスト）東京を拠点に活動。日本語と英語を織り交ぜた歌詞で、海外のプレイリストから火がついた。",
+  "members": [
+    { "name": "Aoi Tsukishima", "role": "Vo", "birthdate": null }
+  ]
+}

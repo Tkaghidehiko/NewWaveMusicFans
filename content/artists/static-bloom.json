@@ -1,0 +1,13 @@
+{
+  "slug": "static-bloom",
+  "name": "Static Bloom",
+  "country": "オーストラリア",
+  "genre": "Dream Pop",
+  "bio": "（サンプルデータ・架空のアーティスト）メルボルン出身の4人組。静けさと轟音を行き来する構成で知られる。",
+  "members": [
+    { "name": "Elin Roe", "role": "Vo", "birthdate": "1996-08-21" },
+    { "name": "Mika Serrano", "role": "Gt", "birthdate": "1994-11-02" },
+    { "name": "Tobias Kerr", "role": "Ba", "birthdate": null },
+    { "name": "Junia Vale", "role": "Dr", "birthdate": "1997-05-30" }
+  ]
+}

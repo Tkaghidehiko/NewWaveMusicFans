@@ -1,0 +1,10 @@
+{
+  "slug": "wren-halloway",
+  "name": "Wren Halloway",
+  "country": "イギリス",
+  "genre": "Indie Folk",
+  "bio": "（サンプルデータ・架空のアーティスト）ロンドン南部を拠点に活動するシンガーソングライター。寝室で録音された初期作品が口伝えで広がった。",
+  "members": [
+    { "name": "Wren Halloway", "role": "Vo, Gt", "birthdate": "1999-03-12" }
+  ]
+}
