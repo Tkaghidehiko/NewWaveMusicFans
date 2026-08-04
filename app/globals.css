@@ -10,9 +10,12 @@
   --border-card: #525b6c;
 
   --text: #f7efe4;
-  --text-sub: #d2ccc3;
-  --text-mute: #a49e96;
-  --text-faint: #918b84;
+  /* 背景の明部（右下）に載っても 4.5:1 を割らない値。
+     ここを暗くすると、背景のグラデーション上で小さい文字が読めなくなる。
+     階層は色差ではなく、文字サイズと太さで作ること。 */
+  --text-sub: #d5cfc6;
+  --text-mute: #cdc8c0;
+  --text-faint: #c7c2ba;
 
   --next-wave: #ffd166;
   --global-trends: #ffa845;
@@ -46,19 +49,19 @@ body {
   background-image: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0) 55%,
-      rgba(255, 255, 255, 0.04) 70%,
-      rgba(255, 252, 244, 0.1) 82%,
-      rgba(240, 232, 214, 0.2) 92%,
-      rgba(214, 203, 180, 0.32) 100%
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.02) 74%,
+      rgba(255, 252, 244, 0.04) 85%,
+      rgba(240, 232, 214, 0.07) 94%,
+      rgba(214, 203, 180, 0.09) 100%
     ),
     linear-gradient(
       135deg,
       #16181f 0%,
-      #1f232c 30%,
-      #2d323e 55%,
-      #3c434f 78%,
-      #4e5666 100%
+      #1e222b 30%,
+      #2a2f3a 55%,
+      #363c48 78%,
+      #414753 100%
     );
   background-attachment: fixed;
   background-size: cover;
@@ -264,7 +267,7 @@ img {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 18px;
 }
 
@@ -403,7 +406,7 @@ img {
 }
 
 .article-body blockquote {
-  border-left: 2px solid var(--global-trends);
+  border-left: 2px solid var(--accent, var(--global-trends));
   margin: 0 0 18px;
   padding: 2px 0 2px 16px;
   color: var(--text-sub);
@@ -544,8 +547,12 @@ img {
 .series-tag {
   font-size: 11px;
   letter-spacing: 0.1em;
-  color: var(--text-faint);
+  /* 隣の日付と同色だとリンクだと分からないため、下線で区別する */
+  color: var(--text-sub);
   text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-card);
 }
 
 .note {
@@ -760,4 +767,33 @@ img {
 /* 本文中のリンクもカテゴリ色に。既定の金色固定だと全カテゴリで同じ顔になる */
 [data-category] .article-body a {
   color: var(--accent, var(--next-wave));
+}
+
+/* 記事が0本のカテゴリでもフッターが画面途中で終わらないようにする */
+main {
+  min-height: calc(100vh - 260px);
+}
+
+@media (max-width: 640px) {
+  /* 表のセルが縮まず、横スクロールしないと数字が1つも見えない状態になっていた。
+     狭い画面ではラベル列を折り返させて、数字を画面内に収める。
+     数字そのものは途中で折り返させない。 */
+  .article-body th,
+  .article-body td {
+    white-space: normal;
+    padding: 8px 9px;
+    font-size: 13px;
+  }
+
+  .article-body td:not(:first-child) {
+    white-space: nowrap;
+  }
+
+  /* それでも収まらない表のために、横に続きがあることを右端の影で示す */
+  .article-body table {
+    background:
+      linear-gradient(to right, var(--bg) 30%, transparent) left / 24px 100% no-repeat,
+      linear-gradient(to left, var(--bg) 30%, transparent) right / 24px 100% no-repeat;
+    background-attachment: local, local;
+  }
 }
