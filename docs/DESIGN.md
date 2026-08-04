@@ -137,7 +137,7 @@
 - [x] Next.jsプロジェクト雛形
 - [x] 記事一覧・記事詳細ページ（Markdown）
 - [x] トップページ・基本デザイン
-- [x] サンプル記事を4本（4カテゴリ各1本。⚠️ 架空の内容なので公開前に差し替え）
+- [x] 記事の執筆（サンプルは削除済み。実データのみを置く方針）
 
 ### Phase 2 — リリース（公開）← 今ここ
 - [x] SEO基本設定（メタ / sitemap.xml / robots.txt / OGP / 構造化データ）
@@ -146,7 +146,7 @@
 - [ ] 【要記入】箇所（運営者名・連絡先・管轄裁判所）を埋める → `grep -rn "要記入" app/`
 - [ ] Vercelデプロイ（Analyticsタブから Enable が必要）
 - [ ] 独自ドメイン設定 → 取得後に `NEXT_PUBLIC_SITE_URL` を設定する
-- [ ] サンプル記事を実記事に差し替え（これが済むまで `NEXT_PUBLIC_ALLOW_INDEXING=false`）
+- [ ] 記事を貯める（1本目公開済み。各カテゴリが埋まるまで `NEXT_PUBLIC_ALLOW_INDEXING=false` 推奨）
 - [ ] Google Search Console にサイトマップを登録
 
 #### 法務ページの方針
