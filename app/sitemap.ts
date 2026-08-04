@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllArticles } from "@/lib/articles";
 import { getAllArtists } from "@/lib/artists";
 import { categories } from "@/lib/categories";
+import { seriesList } from "@/lib/series";
 import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -29,6 +30,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
+  const seriesPages: MetadataRoute.Sitemap = seriesList.map((s) => ({
+    url: absoluteUrl(`/${s.category}/${s.slug}`),
+    lastModified: latestArticleDate,
+    changeFrequency: "weekly",
+    priority: 0.7,
+  }));
+
   const articlePages: MetadataRoute.Sitemap = articles.map((a) => ({
     url: absoluteUrl(`/articles/${a.slug}`),
     lastModified: a.publishedAt ? new Date(a.publishedAt) : undefined,
@@ -42,5 +50,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...categoryPages, ...articlePages, ...artistPages];
+  return [
+    ...staticPages,
+    ...categoryPages,
+    ...seriesPages,
+    ...articlePages,
+    ...artistPages,
+  ];
 }

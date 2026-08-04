@@ -9,6 +9,7 @@ import {
 } from "@/lib/articles";
 import { getCategory } from "@/lib/categories";
 import { getArtist } from "@/lib/artists";
+import { getSeriesForArticle } from "@/lib/series";
 import {
   absoluteUrl,
   buildSocialMetadata,
@@ -47,6 +48,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound();
 
   const category = getCategory(article.category);
+  const series = getSeriesForArticle(article.category, article.series);
   const html = renderMarkdown(article.body);
 
   // 構造化データ。検索結果でのリッチな表示と、記事の出典の明示に使う。
@@ -56,7 +58,7 @@ export default async function ArticlePage({ params }: Props) {
     headline: article.title,
     description: article.lead,
     datePublished: article.publishedAt || undefined,
-    articleSection: category?.label,
+    articleSection: series ? `${category?.label} / ${series.label}` : category?.label,
     inLanguage: "ja",
     mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`),
     image: absoluteUrl(`/articles/${article.slug}/opengraph-image`),
@@ -80,6 +82,14 @@ export default async function ArticlePage({ params }: Props) {
           {category && (
             <Link href={`/${category.slug}`} style={{ color: category.color }}>
               {category.labelEn}
+            </Link>
+          )}
+          {series && category && (
+            <Link
+              href={`/${category.slug}/${series.slug}`}
+              className="series-tag"
+            >
+              {series.labelEn}
             </Link>
           )}
           <span>{formatDate(article.publishedAt)}</span>

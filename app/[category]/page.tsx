@@ -1,8 +1,10 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import { getArticlesByCategory } from "@/lib/articles";
 import { categories, getCategory } from "@/lib/categories";
+import { getSeriesByCategory } from "@/lib/series";
 import { buildSocialMetadata } from "@/lib/site";
 
 type Props = { params: Promise<{ category: string }> };
@@ -33,6 +35,7 @@ export default async function CategoryPage({ params }: Props) {
   if (!found) notFound();
 
   const articles = getArticlesByCategory(category);
+  const series = getSeriesByCategory(category);
 
   return (
     <div className="container">
@@ -43,6 +46,22 @@ export default async function CategoryPage({ params }: Props) {
         <h1>{found.label}</h1>
         <p>{found.description}</p>
       </div>
+
+      {series.length > 0 && (
+        <nav className="series-nav" aria-label="連載">
+          {series.map((s) => (
+            <Link
+              key={s.slug}
+              href={`/${found.slug}/${s.slug}`}
+              className="series-chip"
+              style={{ ["--accent" as string]: found.color }}
+            >
+              <span className="name">{s.label}</span>
+              <span className="desc">{s.description}</span>
+            </Link>
+          ))}
+        </nav>
+      )}
 
       {articles.length > 0 ? (
         <div className="card-grid">
