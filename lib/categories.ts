@@ -21,7 +21,7 @@ export const categories: Category[] = [
     labelEn: "NEXT WAVE",
     description: "次世代アーティスト候補",
     color: "#ffd166",
-    gradient: "linear-gradient(135deg, #6b4310, #2a1c10)",
+    gradient: "linear-gradient(135deg, #4d3f1a, #131c30)",
   },
   {
     slug: "global-trends",
@@ -29,7 +29,7 @@ export const categories: Category[] = [
     labelEn: "GLOBAL TRENDS",
     description: "海外の新しい流行",
     color: "#ffa845",
-    gradient: "linear-gradient(135deg, #7a4416, #2a1a10)",
+    gradient: "linear-gradient(135deg, #543718, #131c30)",
   },
   {
     slug: "j-to-world",
@@ -37,7 +37,7 @@ export const categories: Category[] = [
     labelEn: "J → WORLD",
     description: "世界が注目する日本人",
     color: "#ff8a50",
-    gradient: "linear-gradient(135deg, #7a3a1e, #2a1610)",
+    gradient: "linear-gradient(135deg, #55301c, #131c30)",
   },
   {
     slug: "world-to-j",
@@ -45,7 +45,7 @@ export const categories: Category[] = [
     labelEn: "WORLD → J",
     description: "日本が注目する海外勢",
     color: "#ff7ba0",
-    gradient: "linear-gradient(135deg, #7a2942, #2a1218)",
+    gradient: "linear-gradient(135deg, #4f2338, #131c30)",
   },
 ];
 

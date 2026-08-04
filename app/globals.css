@@ -1,15 +1,16 @@
 :root {
-  --bg: #140f0b;
-  --surface: #1e1610;
-  --surface-2: #221a12;
-  --border: #33251a;
-  --border-soft: #2a2622;
-  --border-card: #3a2a1c;
+  --bg: #080b13;
+  --surface: rgba(19, 26, 43, 0.72);
+  --surface-solid: #131a2b;
+  --surface-2: rgba(25, 34, 55, 0.7);
+  --border: #26314a;
+  --border-soft: #1f2839;
+  --border-card: #2c3a58;
 
   --text: #f7efe4;
-  --text-sub: #c4b4a1;
-  --text-mute: #8e8377;
-  --text-faint: #7c7368;
+  --text-sub: #c9bcac;
+  --text-mute: #938d84;
+  --text-faint: #7f7a73;
 
   --next-wave: #ffd166;
   --global-trends: #ffa845;
@@ -30,12 +31,36 @@ body {
 }
 
 body {
-  background: var(--bg);
+  min-height: 100vh;
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP",
     "Yu Gothic UI", sans-serif;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+
+  /* 上層 = 白いマスキング。紺の末端から現れ、端に向かって薄い金色へ変わる。
+     下層 = 黒から紺へのグラデーション。方向はヒーローカードと同じ 135deg に揃える。 */
+  background-color: var(--bg);
+  background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 52%,
+      rgba(255, 255, 255, 0.05) 68%,
+      rgba(255, 251, 238, 0.15) 80%,
+      rgba(247, 227, 173, 0.3) 90%,
+      rgba(232, 200, 119, 0.48) 100%
+    ),
+    linear-gradient(
+      135deg,
+      #07080d 0%,
+      #0b1120 30%,
+      #122038 55%,
+      #1b2e52 78%,
+      #24406e 100%
+    );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {
@@ -58,8 +83,8 @@ img {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(20, 15, 11, 0.92);
-  backdrop-filter: blur(8px);
+  background: rgba(8, 11, 19, 0.86);
+  backdrop-filter: blur(10px);
   z-index: 10;
 }
 
@@ -86,7 +111,7 @@ img {
   height: 32px;
   border-radius: 9px;
   background: linear-gradient(135deg, #ffd166, #e8763a 60%, #e0728c);
-  color: var(--bg);
+  color: #07080d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,15 +149,15 @@ img {
   font-size: 11px;
   padding: 5px 13px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255, 209, 102, 0.22), rgba(224, 114, 140, 0.22));
+  background: linear-gradient(90deg, rgba(255, 209, 102, 0.2), rgba(224, 114, 140, 0.2));
   color: var(--next-wave);
   letter-spacing: 0.05em;
   margin-bottom: 16px;
 }
 
 .hero-card {
-  background: linear-gradient(135deg, #4a2418 0%, #2b1a12 55%, #1a1210 100%);
-  border: 1px solid #6b3a22;
+  background: linear-gradient(135deg, #26355a 0%, #16203a 52%, #0d1424 100%);
+  border: 1px solid #3c4c76;
   border-radius: 16px;
   padding: 30px;
   min-height: 240px;
@@ -155,7 +180,7 @@ img {
 
 .hero-card p {
   font-size: 14px;
-  color: #d2c0ac;
+  color: #c3cadd;
   margin: 12px 0 0;
 }
 
@@ -171,7 +196,7 @@ img {
   padding: 7px 16px;
   border-radius: 999px;
   background: var(--next-wave);
-  color: #412402;
+  color: #3a2a05;
   font-weight: 600;
 }
 
@@ -179,8 +204,8 @@ img {
   font-size: 12px;
   padding: 7px 16px;
   border-radius: 999px;
-  border: 1px solid #7a4a2e;
-  color: #e8c9a8;
+  border: 1px solid #4d5f8c;
+  color: #d8c6a6;
 }
 
 .divider {
@@ -245,13 +270,14 @@ img {
   overflow: hidden;
   border: 1px solid var(--border-card);
   background: var(--surface);
+  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
   transition: border-color 0.15s ease;
 }
 
 .card:hover {
-  border-color: #6b4a2c;
+  border-color: #4a5d8c;
 }
 
 .card-thumb {
@@ -459,12 +485,15 @@ img {
   color: var(--text-sub);
 }
 
+/* 背景の端が明るくなるため、フッターは自前の暗い面を持たせて可読性を確保する */
 .site-footer {
   border-top: 1px solid var(--border);
   margin-top: 50px;
   padding: 26px 0 40px;
   font-size: 12px;
-  color: var(--text-faint);
+  color: var(--text-sub);
+  background: rgba(8, 11, 19, 0.82);
+  backdrop-filter: blur(10px);
 }
 
 .site-footer .links {
@@ -475,7 +504,7 @@ img {
 }
 
 .site-footer a:hover {
-  color: var(--text-sub);
+  color: var(--next-wave);
 }
 
 .empty {
