@@ -40,7 +40,12 @@ export default async function SeriesPage({ params }: Props) {
   const articles = getArticlesBySeries(category, series);
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      data-kind={parent.kind}
+      data-category={parent.slug}
+      style={{ ["--accent" as string]: parent.color }}
+    >
       <div className="page-head">
         <span className="eyebrow" style={{ color: parent.color }}>
           <Link href={`/${parent.slug}`}>{parent.labelEn}</Link>

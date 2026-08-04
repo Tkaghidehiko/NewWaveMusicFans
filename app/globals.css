@@ -1,16 +1,18 @@
 :root {
-  --bg: #080b13;
-  --surface: rgba(19, 26, 43, 0.72);
-  --surface-solid: #131a2b;
-  --surface-2: rgba(25, 34, 55, 0.7);
-  --border: #26314a;
-  --border-soft: #1f2839;
-  --border-card: #2c3a58;
+  /* ベースは彩度を落としたスレート。背景を主張させないぶん、
+     カテゴリのアクセント色が立つ。紺ベースより一段明るくしている。 */
+  --bg: #1a1d25;
+  --surface: rgba(42, 47, 58, 0.72);
+  --surface-solid: #2a2f3a;
+  --surface-2: rgba(50, 56, 68, 0.7);
+  --border: #454d5c;
+  --border-soft: #363d4a;
+  --border-card: #525b6c;
 
   --text: #f7efe4;
-  --text-sub: #c9bcac;
-  --text-mute: #938d84;
-  --text-faint: #7f7a73;
+  --text-sub: #d2ccc3;
+  --text-mute: #a49e96;
+  --text-faint: #918b84;
 
   --next-wave: #ffd166;
   --global-trends: #ffa845;
@@ -38,25 +40,25 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 
-  /* 上層 = 白いマスキング。紺の末端から現れ、端に向かって薄い金色へ変わる。
-     下層 = 黒から紺へのグラデーション。方向はヒーローカードと同じ 135deg に揃える。 */
+  /* 上層 = 光のマスキング。暗部の末端から現れ、端に向かって暖かい灰へ抜ける。
+     下層 = 暗いスレートから明るいスレートへ。方向はヒーローカードと同じ 135deg に揃える。 */
   background-color: var(--bg);
   background-image: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0) 52%,
-      rgba(255, 255, 255, 0.05) 68%,
-      rgba(255, 251, 238, 0.15) 80%,
-      rgba(247, 227, 173, 0.3) 90%,
-      rgba(232, 200, 119, 0.48) 100%
+      rgba(255, 255, 255, 0) 55%,
+      rgba(255, 255, 255, 0.04) 70%,
+      rgba(255, 252, 244, 0.1) 82%,
+      rgba(240, 232, 214, 0.2) 92%,
+      rgba(214, 203, 180, 0.32) 100%
     ),
     linear-gradient(
       135deg,
-      #07080d 0%,
-      #0b1120 30%,
-      #122038 55%,
-      #1b2e52 78%,
-      #24406e 100%
+      #16181f 0%,
+      #1f232c 30%,
+      #2d323e 55%,
+      #3c434f 78%,
+      #4e5666 100%
     );
   background-attachment: fixed;
   background-size: cover;
@@ -83,7 +85,7 @@ img {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(8, 11, 19, 0.86);
+  background: rgba(20, 23, 30, 0.88);
   backdrop-filter: blur(10px);
   z-index: 10;
 }
@@ -112,7 +114,7 @@ img {
   height: 32px;
   border-radius: 9px;
   background: linear-gradient(135deg, #ffd166, #e8763a 60%, #e0728c);
-  color: #07080d;
+  color: #16181f;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,8 +159,8 @@ img {
 }
 
 .hero-card {
-  background: linear-gradient(135deg, #26355a 0%, #16203a 52%, #0d1424 100%);
-  border: 1px solid #3c4c76;
+  background: linear-gradient(135deg, #3a4257 0%, #262c39 52%, #1b1f28 100%);
+  border: 1px solid #565f74;
   border-radius: 16px;
   padding: 30px;
   min-height: 240px;
@@ -181,7 +183,7 @@ img {
 
 .hero-card p {
   font-size: 14px;
-  color: #c3cadd;
+  color: #cfd3dc;
   margin: 12px 0 0;
 }
 
@@ -205,7 +207,7 @@ img {
   font-size: 12px;
   padding: 7px 16px;
   border-radius: 999px;
-  border: 1px solid #4d5f8c;
+  border: 1px solid #67718a;
   color: #d8c6a6;
 }
 
@@ -278,7 +280,7 @@ img {
 }
 
 .card:hover {
-  border-color: #4a5d8c;
+  border-color: #6b768e;
 }
 
 .card-thumb {
@@ -588,7 +590,7 @@ img {
   padding: 26px 0 40px;
   font-size: 12px;
   color: var(--text-sub);
-  background: rgba(8, 11, 19, 0.82);
+  background: rgba(20, 23, 30, 0.85);
   backdrop-filter: blur(10px);
 }
 
@@ -622,4 +624,140 @@ img {
   .page-head h1 {
     font-size: 23px;
   }
+}
+
+/* ============================================================
+   コンテンツ別のデザイン
+   ============================================================
+
+   2段構えで分けている。
+
+   1. data-kind …… レイアウトを変える
+      domain（4本柱）= 読み物。行間を広く取り、column を狭くして読みやすさを優先
+      axis（Wave）  = 数字の分析。column を広げ、表と数字を主役にする
+
+   2. data-category … 4本柱の中でコンセプトを変える
+      レイアウトは共通のまま、見出しの装飾だけがカテゴリの性格を表す。
+      同じ形をしているから比べられ、装飾が違うから今どこにいるか分かる。
+   ============================================================ */
+
+/* --- 1. レイアウト: 4本柱（読み物） --- */
+
+[data-kind="domain"] .article {
+  max-width: 720px;
+}
+
+[data-kind="domain"] .article-body {
+  line-height: 1.95;
+}
+
+[data-kind="domain"] .article-lead {
+  font-size: 16px;
+  line-height: 1.85;
+}
+
+/* --- 1. レイアウト: Wave（分析） --- */
+
+[data-kind="axis"] .article {
+  max-width: 880px;
+}
+
+[data-kind="axis"] .article h1 {
+  letter-spacing: -0.03em;
+}
+
+/* 数字を縦に揃える。桁が揃わないと表も本文中の金額も比べられない */
+[data-kind="axis"] .article-body,
+[data-kind="axis"] .article-lead {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-kind="axis"] .article-body h2 {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--accent, var(--next-wave));
+}
+
+/* --- 表。Wave の記事では主役になる --- */
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 22px;
+  font-size: 14px;
+  display: block;
+  overflow-x: auto;
+}
+
+.article-body th,
+.article-body td {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 9px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.article-body th {
+  color: var(--text-mute);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border-card);
+}
+
+[data-kind="axis"] .article-body table {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-kind="axis"] .article-body th:not(:first-child),
+[data-kind="axis"] .article-body td:not(:first-child) {
+  text-align: right;
+}
+
+/* --- 2. カテゴリ別のコンセプト（4本柱のみ） --- */
+
+/* Next Wave — 発見。見出しの脇に、下から上へ伸びる線 */
+[data-category="next-wave"] .article-body h2 {
+  position: relative;
+  padding-left: 14px;
+}
+[data-category="next-wave"] .article-body h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to top, var(--accent), transparent);
+}
+
+/* Global Trends — 波及。下線が左から右へ滲んで消える */
+[data-category="global-trends"] .article-body h2 {
+  border-bottom: none;
+  padding-bottom: 10px;
+  background: linear-gradient(90deg, var(--accent), transparent 70%) bottom left /
+    100% 2px no-repeat;
+}
+
+/* J → World — 送り出す。起点が左にある */
+[data-category="j-to-world"] .article-body h2 {
+  border-left: 3px solid var(--accent);
+  padding-left: 13px;
+}
+
+/* World → J — 受け入れる。外（右）から入ってくる */
+[data-category="world-to-j"] .article-body h2 {
+  border-right: 3px solid var(--accent);
+  padding-right: 13px;
+}
+
+/* リード文の罫線もカテゴリ色にそろえる（4本柱のみ。Wave は中立のまま） */
+[data-kind="domain"] .article-lead {
+  border-left-color: var(--accent, var(--border-card));
+}
+
+/* 本文中のリンクもカテゴリ色に。既定の金色固定だと全カテゴリで同じ顔になる */
+[data-category] .article-body a {
+  color: var(--accent, var(--next-wave));
 }

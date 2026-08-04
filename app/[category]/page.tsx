@@ -38,7 +38,12 @@ export default async function CategoryPage({ params }: Props) {
   const series = getSeriesByCategory(category);
 
   return (
-    <div className="container">
+    <div
+      className="container"
+      data-kind={found.kind}
+      data-category={found.slug}
+      style={{ ["--accent" as string]: found.color }}
+    >
       <div className="page-head">
         <span className="eyebrow" style={{ color: found.color }}>
           {found.labelEn}

@@ -72,7 +72,13 @@ export default async function ArticlePage({ params }: Props) {
   };
 
   return (
-    <div className="container">
+    // data-kind でレイアウトが、data-category でコンセプトが切り替わる（globals.css 参照）
+    <div
+      className="container"
+      data-kind={category?.kind}
+      data-category={category?.slug}
+      style={category ? { ["--accent" as string]: category.color } : undefined}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
