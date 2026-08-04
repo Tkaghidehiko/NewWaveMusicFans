@@ -74,6 +74,88 @@ body {
   background-repeat: no-repeat;
 }
 
+/* ── カテゴリごとの背景 ────────────────────────────────────────────
+   トップは無地（`data-category` を持たない）。カテゴリ・連載・記事ページだけ、
+   ベースのグラデーションの上に薄い色の層を1枚重ねて印象を変える。
+
+   ⚠️ ベースそのものは差し替えないこと。
+   全ページで背景を作り直すとサイトの一体感が消え、かつ body のコメントにある
+   コントラストの計算（--text-mute が最悪 5.04:1）を各色でやり直す必要が出る。
+   ここは「上に薄く載せるだけ」に留めてある。
+
+   ⚠️ 濃い側は必ず**ベースの暗部**（左上〜上・下左）に置くこと。
+   ベースは 135deg で右下がいちばん明るい。そこへ色を足すと明度が上がり、
+   右下に載る補助テキストが 4.5:1 を割る。どの色も右下では 0 に抜いてある。
+
+   方向には意味を持たせている。
+   J → World は左から、World → J は右から差す。互いの向きが逆になる。 */
+.container[data-category]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* どのカテゴリも、色を足すのと同時に右下を沈める2層構成にしている。
+   色だけ足すと明度が上がってコントラストを失う。
+   沈める層があるぶん、色は濃く入れられる。 */
+
+/* Next Wave — 夜明け前。低い位置から差す金色 */
+.container[data-category="next-wave"]::before {
+  /* 中心を画面外（下）に置いている。viewport 内に山を作ると
+     左下のフッターに載る補助テキストが 4.5:1 を割った（実測 4.40:1）。 */
+  background-image: radial-gradient(
+      95% 68% at 0% 112%,
+      rgba(255, 199, 82, 0.2),
+      rgba(255, 199, 82, 0) 64%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0) 45%, rgba(12, 14, 10, 0.16) 100%);
+}
+
+/* Global Trends — 外から広がってくる琥珀 */
+.container[data-category="global-trends"]::before {
+  background-image: radial-gradient(
+      100% 70% at 50% -6%,
+      rgba(255, 154, 48, 0.21),
+      rgba(255, 154, 48, 0) 66%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0) 45%, rgba(12, 14, 10, 0.16) 100%);
+}
+
+/* J → World — 日本から外へ。光は左から */
+.container[data-category="j-to-world"]::before {
+  background-image: radial-gradient(
+      105% 80% at -4% 0%,
+      rgba(255, 120, 58, 0.24),
+      rgba(255, 120, 58, 0) 64%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0) 45%, rgba(12, 14, 10, 0.16) 100%);
+}
+
+/* World → J — 外から日本へ。光は右から。J → World と対になる */
+.container[data-category="world-to-j"]::before {
+  background-image: radial-gradient(
+      105% 80% at 104% 0%,
+      rgba(255, 106, 150, 0.24),
+      rgba(255, 106, 150, 0) 64%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0) 45%, rgba(12, 14, 10, 0.16) 100%);
+}
+
+/* Wave — 時間の軸。4本柱の暖色に対してここだけ寒色。
+   横に走る帯にしているのは、空間ではなく時間を扱うセクションだから。 */
+.container[data-category="wave"]::before {
+  background-image: linear-gradient(
+      180deg,
+      rgba(150, 198, 150, 0) 0%,
+      rgba(150, 198, 150, 0.12) 40%,
+      rgba(150, 198, 150, 0.13) 58%,
+      rgba(150, 198, 150, 0) 100%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0) 45%, rgba(12, 14, 10, 0.16) 100%);
+}
+
 a {
   color: inherit;
   text-decoration: none;
