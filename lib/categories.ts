@@ -35,7 +35,7 @@ export const categories: Category[] = [
     labelEn: "NEXT WAVE",
     description: "ブレイク前夜の新人",
     color: "#ffd166",
-    gradient: "linear-gradient(135deg, #4d3f1a, #131c30)",
+    gradient: "linear-gradient(135deg, #4d3f1a, #232820)",
   },
   {
     slug: "global-trends",
@@ -44,7 +44,7 @@ export const categories: Category[] = [
     labelEn: "GLOBAL TRENDS",
     description: "海外の新しい流行",
     color: "#ffa845",
-    gradient: "linear-gradient(135deg, #543718, #131c30)",
+    gradient: "linear-gradient(135deg, #543718, #232820)",
   },
   {
     slug: "j-to-world",
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     labelEn: "J → WORLD",
     description: "世界が注目する日本勢",
     color: "#ff8a50",
-    gradient: "linear-gradient(135deg, #55301c, #131c30)",
+    gradient: "linear-gradient(135deg, #55301c, #232820)",
   },
   {
     slug: "world-to-j",
@@ -62,7 +62,7 @@ export const categories: Category[] = [
     labelEn: "WORLD → J",
     description: "日本が注目する海外勢",
     color: "#ff7ba0",
-    gradient: "linear-gradient(135deg, #4f2338, #131c30)",
+    gradient: "linear-gradient(135deg, #4f2338, #232820)",
   },
   {
     slug: "wave",
@@ -70,10 +70,11 @@ export const categories: Category[] = [
     label: "Wave",
     labelEn: "WAVE",
     description: "いまどの波の上にあるか",
-    // 4本柱が暖色なのに対し、ここだけ寒色にしている。
+    // 4本柱が暖色なのに対し、ここだけ寒色寄り（淡いセージ）にしている。
     // 「並列の5つ目」ではなく「軸が違う」ことを色で示すための意図的な逸脱。
-    color: "#7ecfc7",
-    gradient: "linear-gradient(135deg, #17403d, #131c30)",
+    // 背景と同系色のため、背景より明度をはっきり上げて分離させること。
+    color: "#b3d3ad",
+    gradient: "linear-gradient(135deg, #495b41, #232820)",
   },
 ];
 

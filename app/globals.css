@@ -1,13 +1,14 @@
 :root {
-  /* ベースは彩度を落としたスレート。背景を主張させないぶん、
-     カテゴリのアクセント色が立つ。紺ベースより一段明るくしている。 */
-  --bg: #1a1d25;
-  --surface: rgba(42, 47, 58, 0.72);
-  --surface-solid: #2a2f3a;
-  --surface-2: rgba(50, 56, 68, 0.7);
-  --border: #454d5c;
-  --border-soft: #363d4a;
-  --border-card: #525b6c;
+  /* ベースは彩度を落としたセージグリーン。青系は使わない。
+     暖色のアクセント4色（金〜桃）と補色関係になるため、
+     背景を明るくしてもカテゴリ色が沈まない。 */
+  --bg: #282c24;
+  --surface: rgba(58, 64, 50, 0.72);
+  --surface-solid: #3a4032;
+  --surface-2: rgba(66, 72, 57, 0.7);
+  --border: #5a6150;
+  --border-soft: #474e3e;
+  --border-card: #656d59;
 
   --text: #f7efe4;
   /* 背景の明部（右下）に載っても 4.5:1 を割らない値。
@@ -15,7 +16,7 @@
      階層は色差ではなく、文字サイズと太さで作ること。 */
   --text-sub: #d5cfc6;
   --text-mute: #cdc8c0;
-  --text-faint: #c7c2ba;
+  --text-faint: #cfcac2;
 
   --next-wave: #ffd166;
   --global-trends: #ffa845;
@@ -44,24 +45,29 @@ body {
   -webkit-font-smoothing: antialiased;
 
   /* 上層 = 光のマスキング。暗部の末端から現れ、端に向かって暖かい灰へ抜ける。
-     下層 = 暗いスレートから明るいスレートへ。方向はヒーローカードと同じ 135deg に揃える。 */
+     下層 = 暗いセージから明るいセージへ。方向はヒーローカードと同じ 135deg に揃える。
+
+     全体を明るくすると、右下の明部に載る補助テキストが 4.5:1 を割る。
+     暗部を持ち上げつつ明部を抑える＝グラデーションの振れ幅を詰めることで両立させている。
+     暗部 #282c24 / 明部 #434936（マスク合成後 #4a503c）で
+     --text-mute が最悪 5.04:1。これ以上明部を上げるなら補助テキストも上げること。 */
   background-color: var(--bg);
   background-image: linear-gradient(
       135deg,
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0) 60%,
-      rgba(255, 255, 255, 0.02) 74%,
-      rgba(255, 252, 244, 0.04) 85%,
-      rgba(240, 232, 214, 0.07) 94%,
-      rgba(214, 203, 180, 0.09) 100%
+      rgba(255, 255, 255, 0.012) 74%,
+      rgba(255, 252, 244, 0.024) 85%,
+      rgba(240, 232, 214, 0.04) 94%,
+      rgba(214, 203, 180, 0.05) 100%
     ),
     linear-gradient(
       135deg,
-      #16181f 0%,
-      #1e222b 30%,
-      #2a2f3a 55%,
-      #363c48 78%,
-      #414753 100%
+      #282c24 0%,
+      #2f3429 30%,
+      #373d2f 55%,
+      #3d4333 78%,
+      #434936 100%
     );
   background-attachment: fixed;
   background-size: cover;
@@ -88,7 +94,7 @@ img {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(20, 23, 30, 0.88);
+  background: rgba(30, 34, 26, 0.88);
   backdrop-filter: blur(10px);
   z-index: 10;
 }
@@ -117,7 +123,7 @@ img {
   height: 32px;
   border-radius: 9px;
   background: linear-gradient(135deg, #ffd166, #e8763a 60%, #e0728c);
-  color: #16181f;
+  color: #1c2016;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,8 +168,8 @@ img {
 }
 
 .hero-card {
-  background: linear-gradient(135deg, #3a4257 0%, #262c39 52%, #1b1f28 100%);
-  border: 1px solid #565f74;
+  background: linear-gradient(135deg, #4a5340 0%, #363c2d 52%, #262b1f 100%);
+  border: 1px solid #6a7360;
   border-radius: 16px;
   padding: 30px;
   min-height: 240px;
@@ -186,7 +192,7 @@ img {
 
 .hero-card p {
   font-size: 14px;
-  color: #cfd3dc;
+  color: #cfd4c6;
   margin: 12px 0 0;
 }
 
@@ -210,7 +216,7 @@ img {
   font-size: 12px;
   padding: 7px 16px;
   border-radius: 999px;
-  border: 1px solid #67718a;
+  border: 1px solid #79826c;
   color: #d8c6a6;
 }
 
@@ -283,7 +289,7 @@ img {
 }
 
 .card:hover {
-  border-color: #6b768e;
+  border-color: #7c8570;
 }
 
 .card-thumb {
@@ -597,7 +603,7 @@ img {
   padding: 26px 0 40px;
   font-size: 12px;
   color: var(--text-sub);
-  background: rgba(20, 23, 30, 0.85);
+  background: rgba(30, 34, 26, 0.85);
   backdrop-filter: blur(10px);
 }
 
