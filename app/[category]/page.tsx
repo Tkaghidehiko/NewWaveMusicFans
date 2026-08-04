@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import { getArticlesByCategory } from "@/lib/articles";
 import { categories, getCategory } from "@/lib/categories";
+import { buildSocialMetadata } from "@/lib/site";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -14,7 +15,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const found = getCategory(category);
   if (!found) return {};
-  return { title: found.label, description: found.description };
+
+  return {
+    title: found.label,
+    description: found.description,
+    ...buildSocialMetadata({
+      title: found.label,
+      description: found.description,
+      url: `/${found.slug}`,
+    }),
+  };
 }
 
 export default async function CategoryPage({ params }: Props) {

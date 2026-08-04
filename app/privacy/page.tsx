@@ -1,4 +1,8 @@
-export const metadata = { title: "プライバシーポリシー" };
+export const metadata = {
+  title: "プライバシーポリシー",
+  description: "NewWaveMusicFans における個人情報の取り扱いについて。",
+  alternates: { canonical: "/privacy" },
+};
 
 export default function PrivacyPage() {
   return (

@@ -1,15 +1,40 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  siteUrl,
+  siteName,
+  siteTagline,
+  siteDescription,
+  isIndexable,
+} from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  // 各ページの相対URL（canonical・OGP画像）を絶対URLへ解決するための基準
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "NewWaveMusicFans — 次世代の音楽と、日本と世界のあいだ",
-    template: "%s | NewWaveMusicFans",
+    default: `${siteName} — ${siteTagline}`,
+    template: `%s | ${siteName}`,
   },
-  description:
-    "ブレイク前夜の次世代アーティスト、海外の新しい流行、そして日本と世界が互いに注目し合うアーティストを追う音楽メディア。",
+  description: siteDescription,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    siteName,
+    title: `${siteName} — ${siteTagline}`,
+    description: siteDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} — ${siteTagline}`,
+    description: siteDescription,
+  },
+  robots: isIndexable
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
 };
 
 export default function RootLayout({

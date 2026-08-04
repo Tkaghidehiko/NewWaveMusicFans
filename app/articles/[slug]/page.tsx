@@ -9,6 +9,12 @@ import {
 } from "@/lib/articles";
 import { getCategory } from "@/lib/categories";
 import { getArtist } from "@/lib/artists";
+import {
+  absoluteUrl,
+  buildSocialMetadata,
+  jsonLdScript,
+  siteName,
+} from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,7 +26,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
-  return { title: article.title, description: article.lead };
+
+  return {
+    title: article.title,
+    description: article.lead,
+    ...buildSocialMetadata({
+      title: article.title,
+      description: article.lead,
+      url: `/articles/${article.slug}`,
+      type: "article",
+      publishedTime: article.publishedAt || undefined,
+      section: getCategory(article.category)?.label,
+    }),
+  };
 }
 
 export default async function ArticlePage({ params }: Props) {
@@ -31,8 +49,32 @@ export default async function ArticlePage({ params }: Props) {
   const category = getCategory(article.category);
   const html = renderMarkdown(article.body);
 
+  // 構造化データ。検索結果でのリッチな表示と、記事の出典の明示に使う。
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    headline: article.title,
+    description: article.lead,
+    datePublished: article.publishedAt || undefined,
+    articleSection: category?.label,
+    inLanguage: "ja",
+    mainEntityOfPage: absoluteUrl(`/articles/${article.slug}`),
+    image: absoluteUrl(`/articles/${article.slug}/opengraph-image`),
+    publisher: { "@type": "Organization", name: siteName, url: absoluteUrl("/") },
+    author: { "@type": "Organization", name: siteName, url: absoluteUrl("/") },
+    citation: article.sources.map((s) => s.url),
+    about: article.artists
+      .map((s) => getArtist(s))
+      .filter((a) => a !== undefined)
+      .map((a) => ({ "@type": "MusicGroup", name: a.name })),
+  };
+
   return (
     <div className="container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
+      />
       <article className="article">
         <div className="article-meta">
           {category && (

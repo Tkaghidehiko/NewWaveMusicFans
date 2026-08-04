@@ -1,4 +1,8 @@
-export const metadata = { title: "利用規約" };
+export const metadata = {
+  title: "利用規約",
+  description: "NewWaveMusicFans の利用規約。",
+  alternates: { canonical: "/terms" },
+};
 
 export default function TermsPage() {
   return (

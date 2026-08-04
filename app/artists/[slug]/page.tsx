@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import ArticleCard from "@/components/ArticleCard";
 import { getAllArtists, getArtist } from "@/lib/artists";
 import { getArticlesByArtist } from "@/lib/articles";
+import { absoluteUrl, buildSocialMetadata, jsonLdScript } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,7 +15,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const artist = getArtist(slug);
   if (!artist) return {};
-  return { title: artist.name, description: artist.bio };
+
+  const title = artist.nameJa ? `${artist.name}（${artist.nameJa}）` : artist.name;
+  return {
+    title,
+    description: artist.bio,
+    ...buildSocialMetadata({
+      title,
+      description: artist.bio,
+      url: `/artists/${slug}`,
+      type: "profile",
+    }),
+  };
 }
 
 export default async function ArtistPage({ params }: Props) {
@@ -24,8 +36,29 @@ export default async function ArtistPage({ params }: Props) {
 
   const articles = getArticlesByArtist(slug);
 
+  // 構造化データ。メンバーは公表されている情報のみを載せる（生年月日は出さない）。
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: artist.name,
+    alternateName: artist.nameJa,
+    description: artist.bio,
+    genre: artist.genre,
+    url: absoluteUrl(`/artists/${slug}`),
+    image: absoluteUrl(`/artists/${slug}/opengraph-image`),
+    member: artist.members.map((m) => ({
+      "@type": "Person",
+      name: m.name,
+      roleName: m.role,
+    })),
+  };
+
   return (
     <div className="container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
+      />
       <div className="page-head">
         <span className="eyebrow">
           {artist.country} ・ {artist.genre}

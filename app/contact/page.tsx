@@ -1,4 +1,8 @@
-export const metadata = { title: "お問い合わせ" };
+export const metadata = {
+  title: "お問い合わせ",
+  description: "NewWaveMusicFans へのご連絡・訂正のご依頼について。",
+  alternates: { canonical: "/contact" },
+};
 
 export default function ContactPage() {
   return (

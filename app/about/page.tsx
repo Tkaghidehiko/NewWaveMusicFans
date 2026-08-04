@@ -1,4 +1,8 @@
-export const metadata = { title: "サイトについて" };
+export const metadata = {
+  title: "サイトについて",
+  description: "NewWaveMusicFans の編集方針と、記事のつくり方について。",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (
