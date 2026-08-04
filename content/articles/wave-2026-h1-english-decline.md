@@ -2,6 +2,7 @@
 title: 英語が減っている — 2026年上半期、いま乗っている波の正体
 lead: ストリーミングにおける英語曲の比率が過去最低を記録しました。数字をたどると、いま同時に3つの波が来ていることが見えてきます。日本はそのどこにいるのか。
 category: wave
+series: english
 publishedAt: 2026-08-04
 artists: []
 sources:
@@ -17,10 +18,6 @@ sources:
     url: https://www.koreajoongangdaily.com/entertainment/korean-music-holds-11-share-of-us-streaming-market/12740706
   - title: Latin and country surge in the US as more music is being streamed than ever before（AP）
     url: https://www.koin.com/entertainment-news/ap-latin-and-country-surge-in-the-us-as-more-music-is-being-streamed-than-ever-before/
-  - title: Spotify's Joe Hadley on Why Japanese Music's Global Moment Is Just Beginning（Billboard）
-    url: https://www.billboard.com/business/streaming/spotify-joe-hadley-interview-music-awards-japan-1235998040/
-  - title: J-pop Streams Surge 30% in South Korea - What's Driving the Boom?
-    url: https://respawn.outlookindia.com/pop-culture/pop-culture-news/jpop-south-korea-streaming-growth-2026
 ---
 
 新しいアーティストを1組ずつ追っていると、その1組が特別なのか、それとも大きな流れの一部なのかが分からなくなります。
@@ -63,25 +60,19 @@ sources:
 
 かつて「流行が一巡する」には20年かかると言われました。いま起きているのは**8〜10年での再来**です。
 
-## 日本はこの波のどこにいるか
-
-ここからが、このサイトにとって重要な部分です。
-
-Billboard のインタビューで、Spotify の Joe Hadley 氏は次のような数字を挙げています。2024年、**日本のアーティストに支払われたロイヤリティのおよそ半分が日本国外からのもので、そのうち4分の3近くが日本語の楽曲に対するものだった。**同年、日本のアーティストは国外のリスナーから約26億回の「初めての再生」を得ています。
-
-この「4分の3近くが日本語のまま」という点が決定的です。**英語に寄せた曲ではなく、日本語のまま海外に届いている。**これは前述の「言語の波」と完全に同じ方向を向いています。
-
-近い動きは周辺市場でも観測されています。韓国の音楽配信サービス Genie Music の集計では、2026年上半期のJ-popの再生数が**30%増**。アニメ作品との連動が要因として挙げられています。
-
-つまり日本は、**いま来ている波に対して有利な位置にいます。**英語圏の一極集中が崩れる局面では、固有の言語で作られた音楽が不利になりません。むしろ、そのままで通用する条件が整いつつあります。
-
 ## この波はどこまで続くか
 
 慎重に見ておきたい点もあります。
 
 英語比率の低下は、年に1ポイント前後という緩やかなペースです。劇的な転換ではなく、**構造的だが遅い変化**として捉えるべきものです。K-popが世界のストリーミングの4分の3近くを国外リスナーに依存しているという指摘もあり、これは強さであると同時に、外部環境の変化に弱いことも意味します。
 
-日本については、国内市場で依然としてCDなどのフィジカルが売上の多くを占めているという事情があります。**国内向けの経済構造と、海外で起きているストリーミング中心の動きとが、まだ完全には噛み合っていません。**この差が今後どう埋まるかが、次の焦点になります。
+## 日本はこの波のどこにいるか
+
+英語圏で一極集中が緩むということは、**固有の言語で作られた音楽が不利にならない**局面が来ているということです。日本にとっては追い風にあたります。
+
+ただし日本の市場は、フィジカルとストリーミングが併存する独自の構造を持っており、英語圏の物差しをそのまま当てても読めません。日本側の波は稿を改めて扱います。
+
+> **→ [日本の波: アニメが輸出経路になった — 2026年上半期の日本](/articles/wave-2026-h1-japan-anime)**
 
 ## いまの現在地
 
@@ -91,4 +82,4 @@ Billboard のインタビューで、Spotify の Joe Hadley 氏は次のよう�
 
 このサイトが追っている「日本 ⇄ 海外」の往復は、この波の一部です。個別のアーティストが海を越えているのではなく、**海を越えやすい条件そのものが整いつつある**、というのが現在地の見立てです。
 
-Wave では、この定点観測を継続します。次回は2026年の通年データが出そろったところで、この見立てが正しかったかを確かめます。
+Wave では、この定点観測を英語圏と日本の2軸で継続します。次回は2026年の通年データが出そろったところで、この見立てが正しかったかを確かめます。
