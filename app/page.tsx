@@ -13,9 +13,10 @@ export default function HomePage() {
         <span className="hero-badge">◆ PICK UP</span>
         {featured ? (
           <Link href={`/articles/${featured.slug}`} className="hero-card">
-            <span className="eyebrow" style={{ color: "#ffd166" }}>
-              注目記事
-            </span>
+            {/* 色は .eyebrow の既定（--text-mute）に任せる。
+                ここに固有の色を直書きすると、テーマを差し替えたときに取り残される。
+                実際、暗色テーマの金色 #ffd166 が明色の紙の上に残って 1.32:1 まで落ちていた。 */}
+            <span className="eyebrow">注目記事</span>
             <h1>{featured.title}</h1>
             <p>{featured.lead}</p>
             <div className="hero-actions">

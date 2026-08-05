@@ -10,6 +10,8 @@ import {
 import { getCategory } from "@/lib/categories";
 import { getArtist } from "@/lib/artists";
 import { getSeriesForArticle } from "@/lib/series";
+import { getSeriesPosition } from "@/lib/series-nav";
+import SeriesBar from "@/components/SeriesBar";
 import {
   absoluteUrl,
   buildSocialMetadata,
@@ -49,9 +51,9 @@ export default async function ArticlePage({ params }: Props) {
 
   const category = getCategory(article.category);
   const series = getSeriesForArticle(article.category, article.series);
+  const position = series ? getSeriesPosition(article) : undefined;
   const html = renderMarkdown(article.body);
 
-  // 構造化データ。検索結果でのリッチな表示と、記事の出典の明示に使う。
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
@@ -72,7 +74,6 @@ export default async function ArticlePage({ params }: Props) {
   };
 
   return (
-    // data-kind でレイアウトが、data-category でコンセプトが切り替わる（globals.css 参照）
     <div
       className="container"
       data-kind={category?.kind}
@@ -84,18 +85,19 @@ export default async function ArticlePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
       />
       <article className="article">
+        {/* 連載記事だけが持つ帯。単発記事ではカテゴリのラベルだけで始まる。 */}
+        {series && category && (
+          <SeriesBar
+            article={article}
+            series={series}
+            categorySlug={category.slug}
+          />
+        )}
+
         <div className="article-meta">
           {category && (
             <Link href={`/${category.slug}`} style={{ color: category.color }}>
-              {category.labelEn}
-            </Link>
-          )}
-          {series && category && (
-            <Link
-              href={`/${category.slug}/${series.slug}`}
-              className="series-tag"
-            >
-              {series.labelEn}
+              {category.label}
             </Link>
           )}
           <span>{formatDate(article.publishedAt)}</span>
@@ -139,6 +141,30 @@ export default async function ArticlePage({ params }: Props) {
                 </li>
               ))}
             </ul>
+          </div>
+        )}
+
+        {/* 記事末尾の前後送り。上部の帯と役割が重なるが、
+            読み終えた位置で次に進めることのほうが導線として効く。 */}
+        {position && (position.prev || position.next) && (
+          <div className="series-ends">
+            {position.prev ? (
+              <Link href={`/articles/${position.prev.slug}`} className="end">
+                <span className="dir">← 前の回</span>
+                <p>{position.prev.title}</p>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {position.next && (
+              <Link
+                href={`/articles/${position.next.slug}`}
+                className="end align-end"
+              >
+                <span className="dir">次の回 →</span>
+                <p>{position.next.title}</p>
+              </Link>
+            )}
           </div>
         )}
       </article>
