@@ -24,6 +24,6 @@ export default async function Image({
   return renderOgImage({
     eyebrow: "Article",
     title: (category?.label ?? "NewWaveMusicFans").replace("→", "to"),
-    accent: category?.color ?? "#ffd166",
+    accent: category?.color ?? "#3f6f65",
   });
 }

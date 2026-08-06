@@ -24,6 +24,6 @@ export default async function Image({
   return renderOgImage({
     eyebrow: (parent?.label ?? "NewWaveMusicFans").replace("→", "to"),
     title: found?.labelEn ?? "NewWaveMusicFans",
-    accent: parent?.color ?? "#ffd166",
+    accent: parent?.color ?? "#3f6f65",
   });
 }

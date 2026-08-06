@@ -22,6 +22,6 @@ export default async function Image({
   return renderOgImage({
     eyebrow: "Artist",
     title: artist?.name ?? "NewWaveMusicFans",
-    accent: "#ffd166",
+    accent: "#3f6f65",
   });
 }

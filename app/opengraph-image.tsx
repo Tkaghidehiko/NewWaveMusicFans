@@ -8,6 +8,6 @@ export default function Image() {
   return renderOgImage({
     eyebrow: "Music Media",
     title: "Next-wave artists,\nJapan and the world.",
-    accent: "#ffd166",
+    accent: "#3f6f65",
   });
 }

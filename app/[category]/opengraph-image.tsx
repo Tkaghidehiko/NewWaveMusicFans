@@ -21,6 +21,6 @@ export default async function Image({
     eyebrow: "Category",
     // 矢印(→)は同梱フォントに無く豆腐になるため、画像内では "to" に置き換える
     title: (found?.label ?? "NewWaveMusicFans").replace("→", "to"),
-    accent: found?.color ?? "#ffd166",
+    accent: found?.color ?? "#3f6f65",
   });
 }
