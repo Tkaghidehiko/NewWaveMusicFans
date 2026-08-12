@@ -6,14 +6,42 @@
 ## ステータス
 
 - Phase 0: 設計・計画 ✅（[docs/DESIGN.md](docs/DESIGN.md)）
-- Phase 1: MVP構築（予定）
-- Phase 2: リリース（予定）
+- Phase 1: MVP構築 ✅（4カテゴリ・記事・アーティストページ）
+- Phase 2: リリース ← 今ここ（SEO・分析・法務ページ ✅ / デプロイとドメインは未）
 - Phase 3: 編集パイプライン（予定）
 - Phase 4: 分析・改善運営（予定）
+
+### ⚠️ 公開前に必要な作業
+
+1. 法務ページに未記入箇所があります。以下で一覧できます
+
+   ```
+   grep -rn "要記入" app/
+   ```
+
+   運営者名・連絡先・管轄裁判所を埋め、あわせて各ページの注意書き（`.note`）を削除してください。
+
+2. 記事は現在5本です（Next Wave 1・Wave 3・J → World 1）。
+   **Global Trends と World → J はまだ空です。** 空のカテゴリページを抱えたまま公開するかは判断してください
+   （`NEXT_PUBLIC_ALLOW_INDEXING=false` のままにしておけば検索には出ません）
+
+## 開発
+
+```
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # 本番ビルド
+```
+
+環境変数は [.env.example](.env.example) を参照してください。
+ドメイン確定までは `NEXT_PUBLIC_ALLOW_INDEXING=false` でクロールを止められます。
 
 ## ドキュメント
 
 - [設計・計画ドキュメント](docs/DESIGN.md)
+- [記事の構成マップ](docs/CONTENT-MAP.md) — 何をどこに書くか。記事を書く前にここを見る
+- [ユーザー機能の仕様（ドラフト）](docs/FEATURES-USER.md)
+- [記事・アーティストデータの書き方](content/README.md)
 
 ## 外出先からの作業について
 

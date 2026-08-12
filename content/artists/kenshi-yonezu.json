@@ -1,0 +1,11 @@
+{
+  "slug": "kenshi-yonezu",
+  "name": "Kenshi Yonezu",
+  "nameJa": "米津玄師",
+  "country": "日本",
+  "genre": "J-Pop",
+  "bio": "劇場版『チェンソーマン レゼ篇』主題歌「IRIS OUT」が Billboard JAPAN 2026年上半期の総合ソング・チャートで首位。同曲はストリーミング再生回数が Billboard JAPAN 史上最速の4週で1億回に到達し、2025年10月4日付の米 Billboard「Global 200」で日本語楽曲として史上最高位となる5位を記録した。上半期チャートでは計11冠を獲得している。",
+  "members": [
+    { "name": "Kenshi Yonezu", "role": "Vo", "birthdate": null }
+  ]
+}

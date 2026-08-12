@@ -1,0 +1,13 @@
+{
+  "slug": "florence-road",
+  "name": "Florence Road",
+  "country": "アイルランド",
+  "genre": "Indie Rock / Alternative",
+  "bio": "アイルランド・ウィックロー州ブレイ出身の4人組。幼なじみ同士で2019年に結成し、通っていた学校が面する通り「Florence Road」がバンド名の由来になっている。2025年6月にデビュー・ミックステープ『Fall Back』、2026年3月に2nd EP『Spring Forward』を発表。BBC Sound of 2026 ロングリスト、Amazon Music「2026 Artists to Watch」、Pandora「Artists to Watch 2026」に選出された。",
+  "members": [
+    { "name": "Lily Aron", "role": "Vo", "birthdate": null },
+    { "name": "Emma Brandon", "role": "Gt", "birthdate": null },
+    { "name": "Ailbhe Barry", "role": "Ba", "birthdate": null },
+    { "name": "Hannah Kelly", "role": "Dr", "birthdate": null }
+  ]
+}

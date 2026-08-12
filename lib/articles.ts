@@ -9,6 +9,8 @@ export type Article = {
   title: string;
   lead: string;
   category: CategorySlug;
+  /** サブカテゴリ（連載）の slug。単発記事は未設定 */
+  series?: string;
   publishedAt: string;
   /** 記事に登場するアーティストの slug。アーティストブックの土台になる紐付け */
   artists: string[];
@@ -44,6 +46,7 @@ export function getAllArticles(): Article[] {
         title: data.title ?? "(no title)",
         lead: data.lead ?? "",
         category: data.category as CategorySlug,
+        series: data.series ?? undefined,
         publishedAt: toDateString(data.publishedAt),
         artists: data.artists ?? [],
         sources: data.sources ?? [],
@@ -63,6 +66,15 @@ export function getArticlesByCategory(category: string): Article[] {
 
 export function getArticlesByArtist(artistSlug: string): Article[] {
   return getAllArticles().filter((a) => a.artists.includes(artistSlug));
+}
+
+export function getArticlesBySeries(
+  category: string,
+  series: string
+): Article[] {
+  return getAllArticles().filter(
+    (a) => a.category === category && a.series === series
+  );
 }
 
 export function renderMarkdown(body: string): string {

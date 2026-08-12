@@ -1,23 +1,42 @@
+/* ============================================================
+   NewWaveMusicFans — chill テーマ
+   薄紫の紙 / 丸ゴシック / 低彩度パステル。
+   構造とクラス名は従来のまま。色・書体・角丸・余白だけを差し替えている。
+   ============================================================ */
+
 :root {
-  --bg: #080b13;
-  --surface: rgba(19, 26, 43, 0.72);
-  --surface-solid: #131a2b;
-  --surface-2: rgba(25, 34, 55, 0.7);
-  --border: #26314a;
-  --border-soft: #1f2839;
-  --border-card: #2c3a58;
+  --bg: #f7f4fb;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-solid: #ffffff;
+  --surface-2: rgba(255, 255, 255, 0.7);
+  --border: #ece5f2;
+  --border-soft: #f0eaf6;
+  --border-card: #ece5f2;
 
-  --text: #f7efe4;
-  --text-sub: #c9bcac;
-  --text-mute: #938d84;
-  --text-faint: #7f7a73;
+  --text: #3a3348;
+  /* 白〜薄紫の面に載って 4.5:1 を満たす下限。これより明るくしないこと。 */
+  --text-sub: #4a4159;
+  --text-mute: #6b6280;
+  --text-faint: #6b6280;
 
-  --next-wave: #ffd166;
-  --global-trends: #ffa845;
-  --j-to-world: #ff8a50;
-  --world-to-j: #ff7ba0;
+  /* カテゴリ色は2系統ある。
+     --*-tint … 面・アイコン地に使う淡いパステル
+     --*      … 文字・ボタン地に使う濃いトーン（白抜き文字で AA を満たす） */
+  --next-wave: #ab5339;
+  --next-wave-tint: #e8927c;
+  --global-trends: #8a6a1c;
+  --global-trends-tint: #d9b168;
+  --j-to-world: #4a5cb0;
+  --j-to-world-tint: #8a9ede;
+  --world-to-j: #a4436c;
+  --world-to-j-tint: #dd93b4;
+  --wave: #3f6f65;
+  --wave-tint: #7cc0b2;
 
   --max-w: 1080px;
+  --radius-lg: 24px;
+  --radius: 20px;
+  --radius-sm: 18px;
 }
 
 * {
@@ -33,34 +52,70 @@ body {
 body {
   min-height: 100vh;
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP",
-    "Yu Gothic UI", sans-serif;
-  line-height: 1.7;
+  font-family: "Zen Maru Gothic", -apple-system, BlinkMacSystemFont,
+    "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+  /* chill の要は行送り。1.7 では詰まって見える。 */
+  line-height: 2.05;
   -webkit-font-smoothing: antialiased;
 
-  /* 上層 = 白いマスキング。紺の末端から現れ、端に向かって薄い金色へ変わる。
-     下層 = 黒から紺へのグラデーション。方向はヒーローカードと同じ 135deg に揃える。 */
+  /* ロゴの波形を大きく反復した柄を、薄紫の紙の上に淡く敷く。
+     opacity 0.10 以上にすると本文の可読性を削るため上げないこと。 */
   background-color: var(--bg);
-  background-image: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0) 52%,
-      rgba(255, 255, 255, 0.05) 68%,
-      rgba(255, 251, 238, 0.15) 80%,
-      rgba(247, 227, 173, 0.3) 90%,
-      rgba(232, 200, 119, 0.48) 100%
-    ),
-    linear-gradient(
-      135deg,
-      #07080d 0%,
-      #0b1120 30%,
-      #122038 55%,
-      #1b2e52 78%,
-      #24406e 100%
-    );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%238a7fa8' stroke-opacity='0.10' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M-16 62c22-30 44-30 66 0s44 30 66 0 44-30 66 0 44 30 66 0'/%3E%3Cpath d='M-16 82c22-30 44-30 66 0s44 30 66 0 44-30 66 0 44 30 66 0'/%3E%3Cpath d='M-16 172c22-30 44-30 66 0s44 30 66 0 44-30 66 0 44 30 66 0'/%3E%3Cpath d='M-16 192c22-30 44-30 66 0s44 30 66 0 44-30 66 0 44 30 66 0'/%3E%3C/g%3E%3C/svg%3E");
   background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+}
+
+/* ── カテゴリごとの表情 ────────────────────────────────────────────
+   暗色テーマでは「光の差す向き」で分けていたが、明色ではそれが効かない。
+   ここではページ上部から下へ抜ける淡いティントを1枚重ねる。
+   面が明るいぶん色は薄くてよく、濃くすると文字のコントラストを削る。 */
+.container[data-category]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.container[data-category="next-wave"]::before {
+  background-image: linear-gradient(
+    180deg,
+    rgba(232, 146, 124, 0.16),
+    rgba(232, 146, 124, 0) 46%
+  );
+}
+
+.container[data-category="global-trends"]::before {
+  background-image: linear-gradient(
+    180deg,
+    rgba(217, 177, 104, 0.18),
+    rgba(217, 177, 104, 0) 46%
+  );
+}
+
+.container[data-category="j-to-world"]::before {
+  background-image: linear-gradient(
+    180deg,
+    rgba(138, 158, 222, 0.18),
+    rgba(138, 158, 222, 0) 46%
+  );
+}
+
+.container[data-category="world-to-j"]::before {
+  background-image: linear-gradient(
+    180deg,
+    rgba(221, 147, 180, 0.18),
+    rgba(221, 147, 180, 0) 46%
+  );
+}
+
+.container[data-category="wave"]::before {
+  background-image: linear-gradient(
+    180deg,
+    rgba(124, 192, 178, 0.2),
+    rgba(124, 192, 178, 0) 46%
+  );
 }
 
 a {
@@ -79,11 +134,13 @@ img {
   padding: 0 20px;
 }
 
+/* ── ヘッダー ──────────────────────────────────────────── */
+
 .site-header {
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: rgba(8, 11, 19, 0.86);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(10px);
   z-index: 10;
 }
@@ -93,73 +150,97 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 0;
+  padding: 16px 20px;
   flex-wrap: wrap;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.08em;
 }
 
+/* ロゴマークは細線の二重波形。彩度を持たせず、インク1色で置く。 */
 .logo-mark {
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #ffd166, #e8763a 60%, #e0728c);
-  color: #07080d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 17px;
+  width: 30px;
+  height: 18px;
   flex-shrink: 0;
+  color: #4a4159;
+}
+
+.logo-sub {
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-mute);
 }
 
 .nav {
   display: flex;
-  gap: 18px;
-  font-size: 13px;
+  gap: 6px;
+  align-items: center;
+  font-size: 12px;
   color: var(--text-sub);
   flex-wrap: wrap;
 }
 
+.nav a {
+  padding: 9px 13px;
+  border-radius: 22px;
+  transition: background-color 0.15s ease;
+}
+
 .nav a:hover {
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 現在地はカテゴリ色の濃版で塗る。淡いパステル地に白抜きは AA を満たさない。 */
+.nav a[aria-current="page"] {
+  background: var(--accent, var(--wave));
+  color: #fff;
+}
+
+.nav-axis {
+  color: var(--wave);
+  background: rgba(124, 192, 178, 0.18);
 }
 
 .eyebrow {
   font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--text-faint);
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-mute);
 }
 
+/* ── ヒーロー ──────────────────────────────────────────── */
+
 .hero {
-  padding: 34px 0 30px;
+  padding: 40px 0 30px;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   font-size: 11px;
-  padding: 5px 13px;
+  padding: 7px 15px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255, 209, 102, 0.2), rgba(224, 114, 140, 0.2));
-  color: var(--next-wave);
-  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border);
+  color: var(--accent, var(--wave));
   margin-bottom: 16px;
 }
 
+/* 暗いカードをやめ、淡いグラデーションの面に。角丸を大きく取る。 */
 .hero-card {
-  background: linear-gradient(135deg, #26355a 0%, #16203a 52%, #0d1424 100%);
-  border: 1px solid #3c4c76;
-  border-radius: 16px;
-  padding: 30px;
+  background: linear-gradient(150deg, #efe7f6, #e4eef1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 34px;
   min-height: 240px;
   display: flex;
   flex-direction: column;
@@ -168,44 +249,44 @@ img {
 
 .hero-card h1 {
   font-size: 32px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.55;
   margin: 10px 0 0;
 }
 
 .hero-card h1 .accent {
-  color: #ffb347;
+  color: var(--accent, var(--wave));
 }
 
 .hero-card p {
   font-size: 14px;
-  color: #c3cadd;
+  color: var(--text-sub);
   margin: 12px 0 0;
 }
 
 .hero-actions {
   display: flex;
   gap: 9px;
-  margin-top: 18px;
+  margin-top: 20px;
   flex-wrap: wrap;
 }
 
 .btn-primary {
   font-size: 12px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  background: var(--next-wave);
-  color: #3a2a05;
-  font-weight: 600;
+  padding: 13px 20px;
+  border-radius: 24px;
+  background: var(--accent, var(--wave));
+  color: #fff;
+  font-weight: 500;
 }
 
 .btn-ghost {
   font-size: 12px;
-  padding: 7px 16px;
-  border-radius: 999px;
-  border: 1px solid #4d5f8c;
-  color: #d8c6a6;
+  padding: 13px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border);
+  color: var(--text-sub);
 }
 
 .divider {
@@ -226,62 +307,87 @@ img {
 }
 
 .section-head h2 {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
   margin: 0;
 }
 
 .link-more {
   font-size: 12px;
-  color: var(--next-wave);
+  color: var(--text-mute);
 }
+
+/* ── カテゴリ一覧 ────────────────────────────────────────
+   左の罫線をやめ、丸いアイコン地を持つカードに。 */
 
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 22px 26px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
 }
 
 .category-item {
-  border-left: 2px solid var(--accent, var(--next-wave));
-  padding-left: 13px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  transition: background-color 0.15s ease;
+}
+
+.category-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.category-item .icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-tint, rgba(124, 192, 178, 0.22));
+  color: var(--accent, var(--wave));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .category-item .name {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
-  margin: 0 0 3px;
+  margin: 14px 0 0;
+  line-height: 1;
 }
 
 .category-item .desc {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--text-mute);
-  margin: 0;
+  margin: 7px 0 0;
+  line-height: 1.75;
 }
+
+/* ── 記事カード ────────────────────────────────────────── */
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 18px;
 }
 
 .card {
-  border-radius: 13px;
+  border-radius: var(--radius);
   overflow: hidden;
-  border: 1px solid var(--border-card);
+  border: 1px solid var(--border);
   background: var(--surface);
-  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .card:hover {
-  border-color: #4a5d8c;
+  background: #fff;
 }
 
 .card-thumb {
-  height: 120px;
+  aspect-ratio: 4 / 3;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,121 +395,145 @@ img {
 }
 
 .card-body {
-  padding: 13px 14px 16px;
+  padding: 16px 18px 18px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .card-cat {
-  font-size: 10px;
-  letter-spacing: 0.06em;
+  font-size: 10.5px;
+  font-weight: 500;
 }
 
 .card-title {
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 600;
-  line-height: 1.5;
-  margin: 6px 0 0;
+  line-height: 1.75;
+  margin: 9px 0 0;
 }
 
 .card-date {
   font-size: 11px;
-  color: var(--text-faint);
-  margin: 10px 0 0;
+  color: var(--text-mute);
+  margin: 11px 0 0;
+  line-height: 1;
 }
 
+/* ── ページ見出し ──────────────────────────────────────── */
+
 .page-head {
-  padding: 34px 0 26px;
-  border-bottom: 1px solid var(--border-soft);
-  margin-bottom: 30px;
+  padding: 38px 0 30px;
+  margin-bottom: 26px;
 }
 
 .page-head h1 {
-  font-size: 28px;
-  font-weight: 600;
-  margin: 8px 0 0;
-  letter-spacing: -0.01em;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 14px 0 0;
+  line-height: 1.55;
 }
 
 .page-head p {
   color: var(--text-mute);
-  font-size: 14px;
-  margin: 10px 0 0;
+  font-size: 13.5px;
+  margin: 12px 0 0;
+  max-width: 620px;
 }
+
+/* ── 記事本文 ──────────────────────────────────────────── */
 
 .article {
   max-width: 760px;
   margin: 0 auto;
-  padding: 34px 0 20px;
+  padding: 30px 0 20px;
 }
 
 .article-meta {
   display: flex;
   gap: 14px;
   align-items: center;
-  font-size: 12px;
-  color: var(--text-faint);
+  font-size: 11.5px;
+  color: var(--text-mute);
   margin-bottom: 14px;
   flex-wrap: wrap;
+  line-height: 1;
 }
 
 .article h1 {
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.6;
   margin: 0 0 18px;
 }
 
+/* リードは罫線ではなく、淡い面で囲う */
 .article-lead {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-sub);
-  border-left: 2px solid var(--border-card);
-  padding-left: 14px;
-  margin-bottom: 28px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 30px;
 }
 
 .article-body h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin: 36px 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-soft);
+  margin: 34px 0 12px;
+  line-height: 1.6;
 }
 
 .article-body h3 {
-  font-size: 16px;
+  font-size: 15.5px;
   font-weight: 600;
   margin: 26px 0 8px;
 }
 
 .article-body p {
-  font-size: 15px;
-  margin: 0 0 18px;
+  font-size: 14.5px;
+  line-height: 2.15;
+  margin: 0 0 20px;
+  color: var(--text-sub);
 }
 
 .article-body ul,
 .article-body ol {
-  font-size: 15px;
+  font-size: 14.5px;
   padding-left: 22px;
+  color: var(--text-sub);
 }
 
 .article-body li {
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 }
 
 .article-body a {
-  color: var(--next-wave);
+  color: var(--accent, var(--wave));
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
+/* 引用は淡いグラデーションのブロックにする */
 .article-body blockquote {
-  border-left: 2px solid var(--global-trends);
-  margin: 0 0 18px;
-  padding: 2px 0 2px 16px;
-  color: var(--text-sub);
+  border: none;
+  margin: 26px 0;
+  padding: 24px 26px;
+  border-radius: 22px;
+  background: linear-gradient(150deg, #e4f1ed, #eee9f6);
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.95;
+}
+
+.article-body blockquote p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
 }
 
 .tag-row {
@@ -414,31 +544,34 @@ img {
 }
 
 .tag {
-  font-size: 12px;
-  padding: 5px 13px;
+  font-size: 11.5px;
+  padding: 9px 15px;
   border-radius: 999px;
-  border: 1px solid var(--border-card);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--border);
   color: var(--text-sub);
+  line-height: 1;
 }
 
 .tag:hover {
-  border-color: var(--next-wave);
-  color: var(--next-wave);
+  border-color: var(--accent, var(--wave));
+  color: var(--accent, var(--wave));
 }
 
 .sources {
   background: var(--surface);
-  border: 1px solid var(--border-card);
-  border-radius: 12px;
-  padding: 16px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
   margin: 30px 0;
 }
 
 .sources h2 {
-  font-size: 13px;
-  font-weight: 600;
-  margin: 0 0 10px;
-  color: var(--text-sub);
+  font-size: 12.5px;
+  font-weight: 500;
+  margin: 0 0 12px;
+  color: var(--text-mute);
+  line-height: 1;
 }
 
 .sources ul {
@@ -447,25 +580,182 @@ img {
 }
 
 .sources li {
-  font-size: 13px;
-  margin-bottom: 6px;
-  color: var(--text-mute);
+  font-size: 12.5px;
+  margin-bottom: 8px;
+  color: var(--text-sub);
+  line-height: 1.8;
 }
 
 .sources a {
-  color: var(--global-trends);
+  color: var(--accent, var(--wave));
   text-decoration: underline;
   text-underline-offset: 2px;
   word-break: break-all;
 }
 
+/* ── 軸セクション（Wave） ──────────────────────────────── */
+
+.axis-banner {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  padding: 26px 28px;
+  background: linear-gradient(150deg, #e4f1ed, #eee9f6);
+}
+
+.axis-banner .name {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 10px 0 0;
+  line-height: 1.6;
+}
+
+.axis-banner .desc {
+  font-size: 12px;
+  color: var(--text-mute);
+  margin: 6px 0 0;
+  max-width: 620px;
+  line-height: 1.9;
+}
+
+/* 指標パネル。等幅をやめ、本文書体のまま数字を大きく置く。 */
+.stat-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.stat {
+  flex: 1 1 120px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-sm);
+  padding: 15px 20px;
+}
+
+.stat .label {
+  font-size: 10.5px;
+  color: var(--text-mute);
+  line-height: 1;
+}
+
+.stat .value {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 9px;
+  line-height: 1.2;
+}
+
+/* ── 連載 ──────────────────────────────────────────────── */
+
+.series-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.series-chip {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 17px;
+  background: var(--surface);
+}
+
+.series-chip:hover {
+  background: #fff;
+}
+
+.series-chip .name {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.series-chip .desc {
+  display: block;
+  font-size: 11.5px;
+  color: var(--text-mute);
+  margin-top: 4px;
+  line-height: 1.7;
+}
+
+.series-intro {
+  max-width: 700px;
+  font-size: 13.5px;
+  color: var(--text-sub);
+  margin: 0 0 30px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+/* 記事上部の連載バー。連載記事はこれを必ず持ち、単発記事は持たない。 */
+.series-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  border-radius: 22px;
+  background: linear-gradient(150deg, #e4f1ed, #eee9f6);
+  margin-bottom: 26px;
+}
+
+.series-bar .kicker {
+  font-size: 10.5px;
+  color: var(--wave);
+  line-height: 1;
+}
+
+.series-bar .name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.series-bar .count {
+  font-size: 11px;
+  color: var(--text-mute);
+  margin-left: auto;
+  line-height: 1;
+}
+
+.series-bar .nav-prev,
+.series-bar .nav-next {
+  font-size: 11px;
+  padding: 9px 13px;
+  border-radius: 20px;
+  line-height: 1;
+}
+
+.series-bar .nav-prev {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--text-sub);
+}
+
+.series-bar .nav-next {
+  background: var(--wave);
+  color: #fff;
+}
+
+.series-tag {
+  font-size: 11px;
+  color: var(--text-mute);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border);
+}
+
 .note {
   background: var(--surface);
-  border: 1px dashed var(--border-card);
-  border-radius: 12px;
-  padding: 16px 18px;
+  border: 1px dashed #ddd2e8;
+  border-radius: var(--radius);
+  padding: 20px 22px;
   font-size: 13px;
-  color: var(--text-mute);
+  color: var(--text-sub);
   margin: 24px 0;
 }
 
@@ -474,56 +764,305 @@ img {
 }
 
 .prose h2 {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
   margin: 32px 0 10px;
 }
 
 .prose p,
 .prose li {
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--text-sub);
+  line-height: 2.15;
 }
 
-/* 背景の端が明るくなるため、フッターは自前の暗い面を持たせて可読性を確保する */
+.prose a,
+.note a {
+  color: var(--wave);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── フッター ──────────────────────────────────────────── */
+
 .site-footer {
-  border-top: 1px solid var(--border);
-  margin-top: 50px;
-  padding: 26px 0 40px;
+  margin-top: 60px;
+  padding: 34px 0 40px;
   font-size: 12px;
-  color: var(--text-sub);
-  background: rgba(8, 11, 19, 0.82);
-  backdrop-filter: blur(10px);
+  color: #c9c1d8;
+  background: #4a4159;
+}
+
+.site-footer .cols {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.site-footer .logo {
+  color: #f7f4fb;
+}
+
+.site-footer .logo-mark {
+  color: #f7f4fb;
+}
+
+.site-footer .logo-sub,
+.site-footer .col-head {
+  color: #b8aecb;
+}
+
+.site-footer .col-head {
+  font-size: 10.5px;
+  line-height: 1;
 }
 
 .site-footer .links {
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 13px;
+  line-height: 1;
 }
 
-.site-footer a:hover {
-  color: var(--next-wave);
+.site-footer .links a {
+  color: #f7f4fb;
+}
+
+.site-footer .links a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid #5e5470;
+  line-height: 1;
 }
 
 .empty {
   color: var(--text-mute);
-  font-size: 14px;
+  font-size: 13.5px;
   padding: 30px 0;
+}
+
+/* ── コンテンツ別のレイアウト ──────────────────────────
+   暗色版では見出しの装飾でカテゴリを描き分けていたが、
+   丸ゴシック＋淡い面では罫線の主張が強すぎるため、
+   レイアウトの差だけ残し、カテゴリの差はアクセント色に集約している。 */
+
+[data-kind="domain"] .article {
+  max-width: 720px;
+}
+
+[data-kind="axis"] .article {
+  max-width: 880px;
+}
+
+[data-kind="axis"] .article-body table {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 表 ────────────────────────────────────────────────── */
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 24px;
+  font-size: 13.5px;
+  display: block;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.article-body th,
+.article-body td {
+  border-bottom: 1px solid var(--border-soft);
+  padding: 14px 18px;
+  text-align: left;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+.article-body tr:last-child td {
+  border-bottom: none;
+}
+
+.article-body th {
+  color: var(--text-mute);
+  font-weight: 500;
+  font-size: 11.5px;
+}
+
+[data-kind="axis"] .article-body th:not(:first-child),
+[data-kind="axis"] .article-body td:not(:first-child) {
+  text-align: right;
+}
+
+main {
+  min-height: calc(100vh - 260px);
 }
 
 @media (max-width: 640px) {
   .hero-card {
-    padding: 22px;
+    padding: 24px;
+    border-radius: var(--radius);
   }
   .hero-card h1 {
-    font-size: 24px;
+    font-size: 25px;
   }
   .article h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
   .page-head h1 {
-    font-size: 23px;
+    font-size: 24px;
+  }
+  .nav {
+    gap: 4px;
+    font-size: 11.5px;
+  }
+  .nav a {
+    padding: 8px 11px;
+  }
+
+  .article-body th,
+  .article-body td {
+    white-space: normal;
+    padding: 12px 13px;
+    font-size: 13px;
+  }
+  .article-body td:not(:first-child) {
+    white-space: nowrap;
+  }
+}
+
+/* ── 記事末尾の前後送り ────────────────────────────────── */
+
+.series-ends {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 34px;
+}
+
+.series-ends .end {
+  background: var(--surface);
+  padding: 20px 22px;
+}
+
+.series-ends .end:hover {
+  background: #fff;
+}
+
+.series-ends .align-end {
+  text-align: right;
+}
+
+.series-ends .dir {
+  font-size: 10.5px;
+  color: var(--text-mute);
+  line-height: 1;
+}
+
+.series-ends p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.75;
+  margin: 10px 0 0;
+}
+
+/* ── アーティストページ ────────────────────────────────── */
+
+.artist-head {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  align-items: center;
+  padding: 38px 0 30px;
+}
+
+.artist-photo {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.artist-head h1 {
+  font-size: 34px;
+  font-weight: 700;
+  margin: 14px 0 0;
+  line-height: 1.4;
+}
+
+.artist-head .name-ja {
+  font-size: 13px;
+  color: var(--text-mute);
+  margin: 10px 0 0;
+  line-height: 1;
+}
+
+.artist-head .bio {
+  font-size: 13.5px;
+  color: var(--text-sub);
+  margin: 14px 0 0;
+  max-width: 520px;
+  line-height: 2.05;
+}
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.member {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
+.member .name {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.member .role {
+  margin: 6px 0 0;
+  font-size: 11.5px;
+  color: var(--text-mute);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .series-ends {
+    grid-template-columns: 1fr;
+  }
+  .series-ends .align-end {
+    text-align: left;
+  }
+
+  .artist-head {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .artist-head h1 {
+    font-size: 26px;
   }
 }
