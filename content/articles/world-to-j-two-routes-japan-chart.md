@@ -14,6 +14,14 @@ sources:
     url: https://www.billboard-japan.com/special/detail/2374/
   - title: 洋楽が聴かれなくなった？ "JAPAN Hot 100"チャートイン楽曲の国別構成（Billboard JAPAN）
     url: https://www.billboard-japan.com/special/detail/4382
+  - title: 【ビルボード】PLAVE「かくれんぼ」が総合首位（Billboard JAPAN）
+    url: https://www.billboard-japan.com/d_news/detail/151566/2
+  - title: 【ビルボード】BOYNEXTDOOR「Count To Love」が総合首位、HUNTR/X「Golden」がトップ30位内に（Billboard JAPAN）
+    url: https://www.billboard-japan.com/d_news/detail/152969
+  - title: BOYNEXTDOOR 日本2ndシングル『BOYLIFE』2025年8月20日リリース（HMV）
+    url: https://www.hmv.co.jp/news/article/250627128/
+  - title: 【ビルボード】乃木坂46「Same numbers」が総合首位（ENHYPEN「Shine On Me」は2位。Billboard JAPAN）
+    url: https://www.billboard-japan.com/d_news/detail/152253
   - title: 【ビルボード】TWS「はじめまして」が総合首位（Billboard JAPAN）
     url: https://www.billboard-japan.com/d_news/detail/151356/2
   - title: 【先ヨミ】TWS『はじめまして』16.7万枚で現在シングル1位走行中（Billboard JAPAN）
